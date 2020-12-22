@@ -11,12 +11,41 @@ namespace DataLayer.SQL
         /// Primary Sql Connection - must be set prior to use
         /// </summary>
         internal static SqlConnection sql { get; private set; }
+        public static bool Connected { get; private set; }
 
         #region Startup
-        public static void SetConn(ref SqlConnection Conn)
+        /// <summary>
+        /// Used to set the Connection
+        /// </summary>
+        /// <param name="Conn"></param>
+        /// <returns></returns>
+        public static bool SetConn(string ConnString)
         {
-            sql = Conn;
+            if (!Connected)
+            {
+                sql = new SqlConnection(ConnString);
+                Connected = Test_Conn();
+                return Connected;
+            }
+            else
+            {
+                return false;
+            }
         }
+        public static bool SetConn(SqlConnection Conn)
+        {
+            if (!Connected)
+            {
+                sql = Conn;
+                Connected = Test_Conn();
+                return Connected;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Tests the Sql Connection
         /// </summary>
