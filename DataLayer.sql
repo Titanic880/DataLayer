@@ -12,12 +12,21 @@ create Database DataLayer;
 go
 use DataLayer;
 go
+
+Create Table TestCheck([id] int);
+go
+
+Create Table ScalarTest(
+[id] int
+);
+
 /*
 REMOVAL FUNCTIONS, DELETES ALL EXISTING DB DATA
 use master;
 go
 
-
+Drop Table ScalarTest;
+go
 Drop Database DataLayer;
 go
 */

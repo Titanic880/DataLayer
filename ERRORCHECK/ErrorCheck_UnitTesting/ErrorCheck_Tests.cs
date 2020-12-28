@@ -10,7 +10,7 @@ namespace ErrorCheck_UnitTesting
         [TestMethod]
         public void initilized()
         {
-           
+            throw new NotImplementedException();
         }
     }
 }

@@ -21,29 +21,15 @@ namespace DataLayer.SQL
         /// <returns></returns>
         public static bool SetConn(string ConnString)
         {
-            if (!Connected)
-            {
-                sql = new SqlConnection(ConnString);
-                Connected = Test_Conn();
-                return Connected;
-            }
-            else
-            {
-                return false;
-            }
+            sql = new SqlConnection(ConnString);
+            Connected = Test_Conn();
+            return Connected;
         }
         public static bool SetConn(SqlConnection Conn)
         {
-            if (!Connected)
-            {
-                sql = Conn;
-                Connected = Test_Conn();
-                return Connected;
-            }
-            else
-            {
-                return false;
-            }
+            sql = Conn;
+            Connected = Test_Conn();
+            return Connected;
         }
 
         /// <summary>
@@ -96,6 +82,33 @@ namespace DataLayer.SQL
 
             return test;
         }
+
+        /// <summary>
+        /// Checks to see if the table exists in the database
+        /// </summary>
+        /// <param name="TableName"></param>
+        /// <returns></returns>
+        public static bool Check_Table(string TableName)
+        {
+            string Query = "Select * From "+TableName;
+
+            try
+            {
+                sql.Open();
+                SqlCommand cmd = new SqlCommand(Query, sql);
+                cmd.ExecuteScalar();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                if (sql.State != ConnectionState.Closed)
+                    sql.Close();
+            }
+        }
         #endregion Startup
 
         #region Execution
@@ -134,8 +147,7 @@ namespace DataLayer.SQL
             {
                 sql.Open();
                 Query.Connection = sql;
-                object o = Query.ExecuteScalar();
-                return o;
+                return Query.ExecuteScalar();
             }
             catch (Exception ex)
             {
@@ -165,17 +177,18 @@ namespace DataLayer.SQL
         /// Executes a Query without a return
         /// </summary>
         /// <param name="Query"></param>
-        public static void RunNonQuery(string Query)
+        public static bool RunNonQuery(string Query)
         {
             try
             {
                 sql.Open();
                 SqlCommand cmd = new SqlCommand(Query, sql);
                 cmd.ExecuteNonQuery().ToString();
+                return true;
             }
             catch (Exception ex)
             {
-
+                return false;
             }
             finally
             {
@@ -187,17 +200,18 @@ namespace DataLayer.SQL
         /// Executes a Query without a return
         /// </summary>
         /// <param name="Query"></param>s
-        public static void RunNonQuery(SqlCommand Query)
+        public static bool RunNonQuery(SqlCommand Query)
         {
             try
             {
                 sql.Open();
                 Query.Connection = sql;
                 Query.ExecuteNonQuery().ToString();
+                return true;
             }
             catch (Exception ex)
             {
-
+                return false;
             }
             finally
             {
