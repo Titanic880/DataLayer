@@ -104,7 +104,6 @@ namespace DataLayer.SQL
         /// </summary>
         /// <param name="Query"></param>
         /// <returns></returns>
-        //Credit to my version from 'ChatApp270'
         public static object RunScalar(string Query)
         {
             try
