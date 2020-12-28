@@ -50,5 +50,8 @@
   <ItemGroup>
     <Folder Include="TMP\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="README INFO.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DataLayer;
 
 namespace ErrorCheck_UnitTesting
 {
@@ -7,8 +8,9 @@ namespace ErrorCheck_UnitTesting
     public class ErrorCheck_Tests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void initilized()
         {
+           
         }
     }
 }

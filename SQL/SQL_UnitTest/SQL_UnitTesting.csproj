@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8D37CFB7-FA0B-48B1-BE16-FF1F654745D2}</ProjectGuid>
+    <ProjectGuid>{E5139A9E-1F13-4011-BDA9-D031F2598089}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ErrorCheck_UnitTesting</RootNamespace>
-    <AssemblyName>ErrorCheck_UnitTesting</AssemblyName>
+    <RootNamespace>SQL_UnitTest</RootNamespace>
+    <AssemblyName>SQL_UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,7 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorCheck_Tests.cs" />
+    <Compile Include="Sql_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
