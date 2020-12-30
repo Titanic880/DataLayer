@@ -24,6 +24,11 @@ namespace ErrorCheck_UnitTesting
 
             Assert.IsTrue(ErrorLog.TableBuilt);
         }
+        [TestMethod]
+        public void ToFile()
+        { 
+            Assert.IsTrue(ErrorLog.Output("ToFile Unit test", ErrorLog.ErrorLevel.Debug));
+        }
 
     }
 }

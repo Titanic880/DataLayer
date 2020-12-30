@@ -79,17 +79,17 @@ namespace DataLayer.ERRORCHECK
         /// </summary>
         /// <param name="level"></param>
         /// <param name="input"></param>
-        public static void Output(string input, ErrorLevel level = ErrorLevel.None)
+        public static bool Output(string input, ErrorLevel level = ErrorLevel.None)
         {
             if (OutputType)
             {
                 if (!TableBuilt)
                     Build_Table();
-                ToDB(level, input);
+                return ToDB(level, input);
             }
             else
             {
-                ToFile(level, input);
+                return ToFile(level, input);
             }
         }
         /// <summary>
@@ -105,9 +105,9 @@ namespace DataLayer.ERRORCHECK
                 if (!File.Exists(file))
                 {
                     File.Create(file).Close();
-                    File.WriteAllText(file, ErrorLevel.Startup + " Error File created");
+                    File.WriteAllText(file, ErrorLevel.Startup + " Error File created" + Environment.NewLine);
                 }
-                File.AppendAllText(file, level + " " + input);
+                File.AppendAllText(file, level + " " + input + Environment.NewLine);
             }
             catch //(Exception ex)
             {
@@ -121,7 +121,7 @@ namespace DataLayer.ERRORCHECK
         /// <param name="level"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        private static void ToDB(ErrorLevel level, string input)
+        private static bool ToDB(ErrorLevel level, string input)
         {
             //Inserts Data to the table 
             SqlCommand cmd = new SqlCommand($"Insert into {TableName} Values " +
@@ -129,7 +129,7 @@ namespace DataLayer.ERRORCHECK
 
             cmd.Parameters.AddWithValue("@level", level);
             cmd.Parameters.AddWithValue("@input", input);
-            Sql_Functions.RunNonQuery(cmd);
+            return Sql_Functions.RunNonQuery(cmd);
         }
         #endregion Outputs
     }
