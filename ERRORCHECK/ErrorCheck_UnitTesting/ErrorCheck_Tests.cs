@@ -1,6 +1,8 @@
 ﻿using System;
+using DataLayer.SQL;
+using DataLayer.ERRORCHECK;
+using System.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DataLayer;
 
 namespace ErrorCheck_UnitTesting
 {
@@ -12,5 +14,16 @@ namespace ErrorCheck_UnitTesting
         {
             throw new NotImplementedException();
         }
+        [TestMethod]
+        public void BuildTable()
+        {
+            Sql_Functions.SetConn(ConfigurationManager.AppSettings.Get("Connection"));
+
+            ErrorLog.SetOutput();
+            ErrorLog.Output("BuildTable TestMethod", ErrorLog.ErrorLevel.Debug);
+
+            Assert.IsTrue(ErrorLog.TableBuilt);
+        }
+
     }
 }

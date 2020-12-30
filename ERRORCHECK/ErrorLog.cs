@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataLayer.SQL;
+using System.Data.SqlClient;
 
 namespace DataLayer.ERRORCHECK
 {
-    class ErrorLog
+    public static class ErrorLog
     {
         #region Variables
         /// <summary>
@@ -36,11 +32,11 @@ namespace DataLayer.ERRORCHECK
         /// <summary>
         /// Says if the table has been built
         /// </summary>
-        public static bool TableBuilt = false;
+        public static bool TableBuilt { get; private set; } = false;
         /// <summary>
         /// True is Database, false is File
         /// </summary>
-        public static bool OutputType = false;
+        public static bool OutputType { get; private set; } = false;
         #endregion Variables
 
         /// <summary>
@@ -66,7 +62,15 @@ namespace DataLayer.ERRORCHECK
             foreach (string tbl in Tables)
                 Sql_Functions.RunNonQuery(tbl);
 
-            TableBuilt = true;
+            TableBuilt = Sql_Functions.Check_Table(TableName);
+        }
+        /// <summary>
+        /// Sets the Output type to either database or file
+        /// </summary>
+        /// <param name="ToDB"></param>
+        public static void SetOutput(bool ToDB = true)
+        {
+            OutputType = ToDB;
         }
 
         #region Outputs

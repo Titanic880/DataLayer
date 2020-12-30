@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 
-
 namespace DataLayer.SQL
 {
     public static class Sql_Functions
@@ -70,7 +69,7 @@ namespace DataLayer.SQL
                 drop.ExecuteScalar();
                 test = true;
             }
-            catch
+            catch //(Exception ex)
             {
                 test = false;
             }
@@ -99,7 +98,7 @@ namespace DataLayer.SQL
                 cmd.ExecuteScalar();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -174,7 +173,7 @@ namespace DataLayer.SQL
         }
 
         /// <summary>
-        /// Executes a Query without a return
+        /// Executes a Query returns if it is successful or not
         /// </summary>
         /// <param name="Query"></param>
         public static bool RunNonQuery(string Query)
@@ -197,7 +196,7 @@ namespace DataLayer.SQL
             }
         }
         /// <summary>
-        /// Executes a Query without a return
+        /// Executes a Query returns if it is successful or not
         /// </summary>
         /// <param name="Query"></param>s
         public static bool RunNonQuery(SqlCommand Query)
@@ -209,7 +208,7 @@ namespace DataLayer.SQL
                 Query.ExecuteNonQuery().ToString();
                 return true;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
                 return false;
             }

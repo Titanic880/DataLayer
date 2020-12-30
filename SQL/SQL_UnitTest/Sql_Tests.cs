@@ -74,6 +74,17 @@ namespace SQL_UnitTest
             Assert.AreNotEqual("--", Sql_Functions.RunNonQuery(cmd).ToString().Substring(0, 2));
             Assert.IsTrue(Sql_Functions.Connected);
         }
+        [TestMethod]
+        public void NonQuery_Fail()
+        {
+            Sql_Functions.SetConn(ConfigurationManager.AppSettings.Get("Connection"));
+
+            //Checks the command Version
+            SqlCommand cmd = new SqlCommand("Fail");
+            Assert.IsFalse(Sql_Functions.RunNonQuery(cmd));
+            //Checks the String version
+            Assert.IsFalse(Sql_Functions.RunNonQuery("Fail"));
+        }
 
         [TestMethod]
         public void Scalar_String()
@@ -102,6 +113,17 @@ namespace SQL_UnitTest
             SqlCommand cmd = new SqlCommand(test);
             Assert.AreNotEqual("--", Sql_Functions.RunScalar(cmd));
             Assert.IsTrue(Sql_Functions.Connected);
+        }
+        [TestMethod]
+        public void Scalar_Fail()
+        {
+            Sql_Functions.SetConn(ConfigurationManager.AppSettings.Get("Connection"));
+
+            //Checks the command Version
+            SqlCommand cmd = new SqlCommand("Fail");
+            Assert.AreEqual("--",Sql_Functions.RunScalar(cmd).ToString().Substring(0,2));
+            //Checks the String version
+            Assert.AreEqual("--", Sql_Functions.RunScalar("fail").ToString().Substring(0, 2));
         }
 
         [TestMethod]
